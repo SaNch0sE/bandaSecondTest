@@ -1,12 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository, getConnectionToken } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, ObjectID } from 'typeorm';
 import Posts from './entities/post.entity';
 import Comments from './entities/comment.entity';
 import postDto from './dto/post.dto';
 import commentDto from './dto/comment.dto';
 import { IUpdate } from './interfaces/IUpdate';
-import { ObjectID } from 'typeorm';
 
 @Injectable()
 export default class BlogService {
@@ -36,7 +35,7 @@ export default class BlogService {
   }
 
   getPost(_id: ObjectID): Promise<Posts | undefined> {
-    return this.postsRepository.findOne( _id );
+    return this.postsRepository.findOne(_id);
   }
 
   getPosts(page): Promise<object> {

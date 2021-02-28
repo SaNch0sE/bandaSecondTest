@@ -1,4 +1,6 @@
-import { Body, Controller, Param, HttpStatus, Post, Get, Delete, Request, Response, UseGuards } from '@nestjs/common';
+import {
+  Body, Controller, Param, HttpStatus, Post, Get, Delete, Request, Response, UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';
 import BlogService from './blog.service';
@@ -33,7 +35,6 @@ export default class BlogController {
     const post: IPost = await this.blogService.getPost(id);
     return res.status(HttpStatus.OK).json(post);
   }
-
 
   @Get('/post/:id/comments')
   async getComments(@Param('id') id, @Response() res) {
@@ -75,7 +76,7 @@ export default class BlogController {
   @UseGuards(AuthGuard('jwt'))
   @Get('/post/:id/like')
   async postLike(@Param('id') id, @Request() req, @Response() res) {
-    const payload = BlogController.getUserPayload(req)
+    const payload = BlogController.getUserPayload(req);
     const post: IPost = await this.blogService.getPost(id);
     const answer: boolean = post.likes.includes(payload._id);
 
@@ -119,6 +120,7 @@ export default class BlogController {
 
   @Get('/page/:page')
   async getPosts(@Param('page') page, @Response() res) {
+    // eslint-disable-next-line radix
     const posts = await this.blogService.getPosts(parseInt(page));
     return res.status(HttpStatus.OK).json(posts);
   }

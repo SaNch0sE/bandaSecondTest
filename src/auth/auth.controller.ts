@@ -57,16 +57,15 @@ export default class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Post('/update')
   public async passwordUpdate(@Request() req, @Response() res, @Body() profile: IUpdate) {
-    if (profile.newPassword !== profile.newPasswordAgain) {
-      return 'Passwords don`t match';
+    if (profile.newPassword === profile.newPasswordAgain) {
+      const [, token] = req.headers.authorization.split(' ');
+      const decoded: any = this.jwtService.verify(token);
+      bcrypt.hash(profile.newPassword, 10, async (err, hash) => {
+        const result = await this.authService.passwordUpdate(decoded.email, profile.oldPassword, hash);
+        return res.status(HttpStatus.OK).json(result);
+      });
     }
-
-    const [, token] = req.headers.authorization.split(' ');
-    const decoded: any = this.jwtService.verify(token);
-    bcrypt.hash(profile.newPassword, 10, async (err, hash) => {
-      const result = await this.authService.passwordUpdate(decoded.email, profile.oldPassword, hash);
-      return res.status(HttpStatus.OK).json(result);
-    });
+    return 'Passwords don`t match';
   }
 
   @Post('refreshToken')
@@ -74,11 +73,10 @@ export default class AuthController {
     const { id: _id, email } = this.jwtService.verify(refreshToken);
     const oldRefreshToken: string = await this.authService.getRefreshTokenByEmail(email);
 
-    /** if the old refresh token is not equal to request refresh token then this user is unauthorized*/
+    /* if the old refresh token is not equal to request refresh token then this user is unauthorized */
     if (!oldRefreshToken || oldRefreshToken !== refreshToken) {
       throw new UnauthorizedException('Authentication credentials were missing or incorrect');
     }
-
 
     const newTokens = await this.authService.login({ _id, email });
     return res.status(HttpStatus.OK).json(newTokens);

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { PublicController } from './public.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { PublicController } from './public.controller';
 
 @Module({
   imports: [
@@ -9,6 +9,6 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'views'),
     }),
   ],
-  controllers: [PublicController]
+  controllers: [PublicController],
 })
 export class PublicModule {}

@@ -54,8 +54,8 @@ export default class AuthService {
       'EX',
       86400,
     );
-
-    return { accessToken , refreshToken };
+    const { firstName } = await this.usersService.findByEmail(payload.email);
+    return { accessToken, refreshToken, firstName };
   }
 
   async validateUserToken(payload: IJwtPayload): Promise<Users> {

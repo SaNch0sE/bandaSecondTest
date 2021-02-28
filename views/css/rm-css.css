@@ -1,0 +1,27 @@
+img {
+  height: 16em;
+}
+
+.container {
+  display: block;
+  border: 2px;
+  border-color: black;
+  margin-top: 3rem;
+}
+
+#source {
+  width: 40vw;
+  height: 80vh;
+}
+
+#result {
+  overflow:scroll;
+  width: 40vw;
+  height: 80vh;
+}
+
+#post {
+  margin-left: 12rem;
+  margin-right: 12rem;
+  margin-top: 6rem;
+}
