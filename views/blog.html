@@ -127,8 +127,8 @@
   <nav class="navbar fixed-top navbar-light bg-light">
     <a class="navbar-brand" href="#">Simple Blog</a>
     <form id="navLoggedOut" class="form-inline">
-      <a class="btn btn-outline-success mr-sm-2" type="button" href="http://aboyko.shpp.me:3000/login">Увійти</a>
-      <a class="btn btn-outline-secondary my-2 my-sm-0" type="button" href="http://aboyko.shpp.me:3000/register">Зареєструватись</a>
+      <a class="btn btn-outline-success mr-sm-2" type="button" href="/login">Увійти</a>
+      <a class="btn btn-outline-secondary my-2 my-sm-0" type="button" href="/register">Зареєструватись</a>
     </form>
     <form id="navLoggedIn" class="form-inline" style="display: none;">
       <span class="navbar-brand" id="nickname"></span>
@@ -148,7 +148,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create new post</h5>
+                    <h5 class="modal-title">Створити публікацію</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -223,7 +223,19 @@
   animation: show 4s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out; 
+  animation-timing-function: ease-in-out;
+  -webkit-animation: show 4s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation: show 4s;
+  -moz-animation-fill-mode: forwards;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+  -o-animation: show 4s;
+  -o-animation-fill-mode: forwards;
+  -o-animation-iteration-count: infinite;
+  -o-animation-timing-function: ease-in-out;
 }
 
 #blue {
@@ -256,7 +268,7 @@
   to {
     stroke-dashoffset: 0;
  }
-    }
+}
 
 @keyframes show {
   0% {
@@ -269,9 +281,64 @@
     opacity: 0.15;
  }
 }
+
+@-webkit-keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+ }
+}
+
+@-webkit-keyframes show {
+  0% {
+    opacity: 0.15;
+ }
+  50% {
+    opacity: 0.2;
+ }
+  100% {
+    opacity: 0.15;
+ }
+}
+
+@-o-keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+ }
+}
+
+@-o-keyframes show {
+  0% {
+    opacity: 0.15;
+ }
+  50% {
+    opacity: 0.2;
+ }
+  100% {
+    opacity: 0.15;
+ }
+}
+
+@-moz-keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+ }
+}
+
+@-moz-keyframes show {
+  0% {
+    opacity: 0.15;
+ }
+  50% {
+    opacity: 0.2;
+ }
+  100% {
+    opacity: 0.15;
+ }
+}
 </style>
 <script>
-  const host = "http://aboyko.shpp.me:3000";
+  // const host = "http://aboyko.shpp.me:3000";
+  const host = 'http://localhost:3000';
 
   async function logout() {
     const config = {

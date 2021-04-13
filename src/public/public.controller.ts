@@ -16,11 +16,6 @@ export class PublicController {
     return res.sendFile(path.join(__dirname, '../../views/login.html'));
   }
 
-  @Get('/posts')
-  async blog(@Response() res) {
-    return res.sendFile(path.join(__dirname, '../../views/blog.html'));
-  }
-
   @Get('/')
   async main(@Response() res) {
     return res.sendFile(path.join(__dirname, '../../views/index.html'));
