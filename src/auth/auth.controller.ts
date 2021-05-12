@@ -57,14 +57,12 @@ export default class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Post('/update')
   public async passwordUpdate(@Request() req, @Response() res, @Body() profile: IUpdate) {
-    if (profile.newPassword === profile.newPasswordAgain) {
-      const [, token] = req.headers.authorization.split(' ');
-      const decoded: any = this.jwtService.verify(token);
-      bcrypt.hash(profile.newPassword, 10, async (err, hash) => {
-        const result = await this.authService.passwordUpdate(decoded.email, profile.oldPassword, hash);
-        return res.status(HttpStatus.OK).json(result);
-      });
-    }
+    const [, token] = req.headers.authorization.split(' ');
+    const decoded: any = this.jwtService.verify(token);
+    bcrypt.hash(profile.newPassword, 10, async (err, hash) => {
+      const result = await this.authService.passwordUpdate(decoded.email, profile.oldPassword, hash);
+      return res.status(HttpStatus.OK).json(result);
+    });
     return 'Passwords don`t match';
   }
 
@@ -82,12 +80,12 @@ export default class AuthController {
     return res.status(HttpStatus.OK).json(newTokens);
   }
 
-  @Delete('logout/all')
-  @HttpCode(204)
-  async logoutAll(): Promise<boolean> {
-    await this.authService.deleteAllTokens();
-    return true;
-  }
+  // @Delete('logout/all')
+  // @HttpCode(204)
+  // async logoutAll(): Promise<boolean> {
+  //   await this.authService.deleteAllTokens();
+  //   return true;
+  // }
 
   @Delete('logout/:token')
   @HttpCode(204)
