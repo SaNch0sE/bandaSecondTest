@@ -192,11 +192,12 @@
     </footer>
   </div>
   <style>
-    nav {
-      margin-bottom: 5em;
+    .rpost {
+      margin-top: 5em;
     }
 
     #createPostBtn {
+      margin-top: 5em;
       display: block;
       width: 100%;
     }
@@ -316,16 +317,18 @@
         background-image: linear-gradient(to bottom right, #06A1C4, #CE1B5F);
       }
 
-      nav {
-        margin-bottom: 8em;
-      }
-
       #bg {
         display: none;
       }
 
       #posts {
         display: contents;
+      }
+
+      #createPostBtn {
+        margin-top: 5em;
+        display: block;
+        width: 100%;
       }
 
       .container {
@@ -652,7 +655,7 @@
         $('#pages').html('');
         $('#createPostBtn').hide();
         $('#posts').html(`
-      <div id="${post._id}Content" class="card">
+      <div id="${post._id}Content" class="card rpost">
       <div class="card">
         <h5 class="card-header"><a href="${host}/" class="btn btn-secondary btn-sm mr-2"><</a>${post.title}<br>
           <button class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#updatePost">Редагувати</button>
