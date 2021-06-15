@@ -7,7 +7,7 @@ import Comments from './entities/comment.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Posts, Comments])
+    TypeOrmModule.forFeature([Posts, Comments]),
   ],
   controllers: [BlogController],
   providers: [BlogService],
